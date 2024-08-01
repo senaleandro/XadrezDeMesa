@@ -2,7 +2,7 @@
 
 using System.Runtime.InteropServices;
 
-namespace Tabuleiro
+namespace tabuleiro
 {
     public class Posicao
     {
