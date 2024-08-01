@@ -13,8 +13,9 @@ namespace xadrez_Console
                 Table tab = new Table(8, 8);
 
                 tab.colocarPeca(new Torre(tab, Cor.Preta), new Posicao(0, 0));
-                tab.colocarPeca(new Torre(tab, Cor.Preta), new Posicao(1, 9));
-                tab.colocarPeca(new Rei(tab, Cor.Preta), new Posicao(0, 0));
+                tab.colocarPeca(new Torre(tab, Cor.Preta), new Posicao(1, 3));
+                tab.colocarPeca(new Rei(tab, Cor.Preta), new Posicao(0, 2));
+                tab.colocarPeca(new Torre(tab, Cor.Branca), new Posicao(3, 5));
 
                 Tela.imprimirTabuleiro(tab);
 
@@ -23,6 +24,7 @@ namespace xadrez_Console
             {
                 Console.WriteLine("Error: " + e.Message);
             }
+            Console.ReadLine();
 
         }
     }
