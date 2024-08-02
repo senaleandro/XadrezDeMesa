@@ -11,6 +11,10 @@ namespace xadrez
             this.linha = linha;
         }
 
+        public void definirValores( int linha, int coluna)
+        {
+        }
+
         public Posicao toPosicao()
         {
             return new Posicao((char)(coluna - 'a'), 8 - linha);
