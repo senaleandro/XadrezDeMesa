@@ -1,26 +1,31 @@
-using tabuleiro;
+using xadrez_Console;
 
 namespace xadrez
 {
-    public class PosicaoXadrez
+    class PosicaoXadrez
     {
-        public char coluna { get; set; }
-        public int linha { get; set; }
+        public char Coluna { get; set; }
+        public int Linha { get; set; }
 
         public PosicaoXadrez(char coluna, int linha)
         {
-           this.coluna = coluna;
-           this.linha = linha;
+            if (coluna < 'a' || coluna > 'h')
+                throw new ArgumentException("Coluna deve estar entre 'a' e 'h'");
+            if (linha < 1 || linha > 8)
+                throw new ArgumentException("Linha deve estar entre 1 e 8");
+
+            Coluna = coluna;
+            Linha = linha;
         }
 
-        public Posicao toPosicao()
+        public Posicao ToPosicao()
         {
-            return new Posicao(8 - linha, coluna - 'a');
+            return new Posicao((char)(Coluna - 'a'), 8 - Linha);
         }
 
         public override string ToString()
         {
-            return "" + coluna + linha;
+            return $"{Coluna}{Linha}";
         }
     }
 }

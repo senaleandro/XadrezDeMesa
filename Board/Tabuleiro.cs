@@ -1,12 +1,13 @@
-namespace tabuleiro
+
+namespace xadrez
 {
-    class Table
+    class Tabuleiro
     {
         public int linhas { get; set; }
         public int colunas { get; set; }
         private Peca[,] pecas;
 
-        public Table(int linhas, int colunas)
+        public Tabuleiro (int linhas, int colunas)
         {
             this.linhas = linhas;
             this.colunas = colunas;
@@ -35,9 +36,21 @@ namespace tabuleiro
             {
                 throw new TabuleiroException("Já existe uma peça nessa posição");
             }
-            
+
             pecas[pos.linha, pos.coluna] = p;
             p.posicao = pos;
+        }
+
+        public Peca retirarPeca(Posicao pos)
+        {
+            if(peca(pos) == null)
+            {
+                return null;
+            }
+            Peca aux = peca(pos);
+            aux.posicao = null;
+            pecas[pos.linha, pos.coluna] = null;
+            return aux;
         }
 
         public bool posicaoValida(Posicao pos)

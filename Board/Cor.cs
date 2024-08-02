@@ -2,8 +2,8 @@ namespace xadrez_Console.Tabuleiro
 {
     enum Cor
     {
-        Branca,
         Preta,
+        Branca,
         Verde,
         Amarela,
         Vermelha

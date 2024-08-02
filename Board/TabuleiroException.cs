@@ -1,4 +1,4 @@
-namespace tabuleiro
+namespace xadrez
 {
     public class TabuleiroException : Exception
     {

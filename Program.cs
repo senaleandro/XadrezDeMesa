@@ -1,7 +1,6 @@
-﻿using tabuleiro;
+﻿using System;
 using xadrez;
-using xadrez_Console.Tabuleiro;
-namespace xadrez_Console
+namespace xadrez
 {
     class Program
     {
@@ -9,16 +8,25 @@ namespace xadrez_Console
         {
             try
             {
+                PartidaDeXadrez partida = new PartidaDeXadrez();
 
-                Table tab = new Table(8, 8);
+                while (!partida.terminada)
+                {
 
-                tab.colocarPeca(new Torre(tab, Cor.Preta), new Posicao(0, 0));
-                tab.colocarPeca(new Torre(tab, Cor.Preta), new Posicao(1, 3));
-                tab.colocarPeca(new Rei(tab, Cor.Preta), new Posicao(0, 2));
-                tab.colocarPeca(new Torre(tab, Cor.Branca), new Posicao(3, 5));
+                    Console.Clear();
+                    Tela.imprimirTabuleiro(partida.Tab);
 
-                Tela.imprimirTabuleiro(tab);
+                    Console.WriteLine();
+                    Console.Write("Origem: ");
+                    Posicao origem = Tela.lerPosicaoXadrez().ToPosicao();
+                    Console.Write("Destino: ");
+                    Posicao destino = Tela.lerPosicaoXadrez().ToPosicao();
 
+                    partida.executaMovimento(origem, destino);
+
+                }
+
+                Tela.imprimirTabuleiro(partida.Tab);
             }
             catch (TabuleiroException e)
             {
