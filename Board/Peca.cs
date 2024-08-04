@@ -1,3 +1,4 @@
+using System.Reflection.Metadata;
 using xadrez_Console.Tabuleiro;
 
 namespace xadrez
@@ -17,11 +18,34 @@ namespace xadrez
             this.qtdMovimentos = 0;
         }
 
-        public abstract bool[,] movimentosPossiveis();
-
-        public void incrementarQtdMovimento()
+         public void incrementarQtdMovimento()
         {
             qtdMovimentos++;
         }
+
+        public bool existeMovimentosPossiveis()
+        {
+             bool[,] mat = movimentosPossiveis();
+             for (int i = 0; i < Tab.linhas; i++)
+             {
+                for (int j = 0; j < Tab.colunas; j++)
+                {
+                    if (mat[i, j])
+                    {
+                        return true;
+                    }
+                }
+                
+             }
+             return false;
+        }
+
+        public bool podeMoverPara(Posicao pos)
+        {
+            return movimentosPossiveis()[pos.linha, pos.coluna];
+        }
+
+        public abstract bool[,] movimentosPossiveis();
+
     }
 }

@@ -26,7 +26,7 @@ namespace xadrez
         {
 
             ConsoleColor fundoOriginal = Console.BackgroundColor;
-            ConsoleColor fundoAlterado = ConsoleColor.DarkGray;
+            ConsoleColor fundoAlterado = ConsoleColor.Green;
 
             for (int i = 0; i < tab.linhas; i++)
             {
@@ -54,8 +54,12 @@ namespace xadrez
 
         public static PosicaoXadrez lerPosicaoXadrez()
         {
+#pragma warning disable CS8600 // Conversão de literal nula ou possível valor nulo em tipo não anulável.
             string s = Console.ReadLine();
+#pragma warning restore CS8600 // Conversão de literal nula ou possível valor nulo em tipo não anulável.
+#pragma warning disable CS8602 // Desreferência de uma referência possivelmente nula.
             char coluna = s[0];
+#pragma warning restore CS8602 // Desreferência de uma referência possivelmente nula.
             int linha = int.Parse(s[1] + "");
             return new PosicaoXadrez(coluna, linha);
         }
@@ -75,7 +79,7 @@ namespace xadrez
                 else
                 {
                     ConsoleColor aux = Console.ForegroundColor;
-                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.Write(peca);
                     Console.ForegroundColor = aux;
                 }

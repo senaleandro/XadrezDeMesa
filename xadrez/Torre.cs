@@ -82,7 +82,7 @@ namespace xadrez
                 {
                     break;
                 }
-                pos.coluna  -= 'a';
+                pos.coluna -= 'a';
             }
             return mat;
 
