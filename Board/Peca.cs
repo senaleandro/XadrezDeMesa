@@ -5,7 +5,7 @@ namespace xadrez
 {
     abstract class Peca
     {
-        public Posicao? posicao { get; set; }
+        public Posicao posicao { get; set; }
         public Cor cor { get; protected set; }
         public int qtdMovimentos { get; protected set; }
         public Tabuleiro Tab { get; protected set; }
