@@ -26,10 +26,12 @@ namespace xadrez
            Posicao pos = new Posicao((char)0, 0);
 
 
-           // Acima
+            // Acima
 
-           pos.definirValores(posicao.linha - 1, posicao.coluna);
-           if (Tab.posicaoValida(pos) && podeMover(pos))
+#pragma warning disable CS8602 // Desreferência de uma referência possivelmente nula.
+            pos.definirValores(posicao.linha - 1, posicao.coluna);
+#pragma warning restore CS8602 // Desreferência de uma referência possivelmente nula.
+            if (Tab.posicaoValida(pos) && podeMover(pos))
            {
             mat[pos.linha, pos.coluna] = true;
 

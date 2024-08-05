@@ -41,7 +41,7 @@ namespace xadrez
             p.posicao = pos;
         }
 
-        public Peca retirarPeca(Posicao pos)
+        public Peca? retirarPeca(Posicao pos)
         {
             if(peca(pos) == null)
             {
@@ -49,7 +49,9 @@ namespace xadrez
             }
             Peca aux = peca(pos);
             aux.posicao = null;
+#pragma warning disable CS8625 // Não é possível converter um literal nulo em um tipo de referência não anulável.
             pecas[pos.linha, pos.coluna] = null;
+#pragma warning restore CS8625 // Não é possível converter um literal nulo em um tipo de referência não anulável.
             return aux;
         }
 

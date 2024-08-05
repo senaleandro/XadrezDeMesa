@@ -28,7 +28,9 @@ namespace xadrez
 
             // Acima
 
+#pragma warning disable CS8602 // Desreferência de uma referência possivelmente nula.
             pos.definirValores(posicao.linha - 1, posicao.coluna);
+#pragma warning restore CS8602 // Desreferência de uma referência possivelmente nula.
             while (Tab.posicaoValida(pos) && podeMover(pos))
             {
                 mat[pos.linha, pos.coluna] = true;
@@ -43,7 +45,9 @@ namespace xadrez
 
             // Abaixo
 
+#pragma warning disable CS0162 // Código inacessível detectado
             pos.definirValores(posicao.linha + 1, posicao.coluna);
+#pragma warning restore CS0162 // Código inacessível detectado
             while (Tab.posicaoValida(pos) && podeMover(pos))
             {
                 mat[pos.linha, pos.coluna] = true;
