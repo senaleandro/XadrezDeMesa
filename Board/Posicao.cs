@@ -2,8 +2,8 @@ namespace xadrez
 {
     class Posicao
     {
+        public int coluna { get; set; }
         public int linha { get; set; }
-        public char coluna { get; set; }
 
         public Posicao(char coluna, int linha)
         {
