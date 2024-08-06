@@ -1,3 +1,4 @@
+using tabuleiro;
 using xadrez_Console.Tabuleiro;
 
 namespace xadrez
@@ -25,9 +26,9 @@ namespace xadrez
         {
             bool[,] mat = new bool[Tab.linhas, Tab.colunas];
 
-            Posicao pos = new Posicao((char)0, 0);
+            Posicao? pos = new Posicao('a', 0);
 
-            pos.definirValores(posicao.linha - 1, posicao.coluna - 2);
+            pos.definirValores(posicao!.linha - 1, posicao.coluna - 2);
             if (Tab.posicaoValida(pos) && podeMover(pos))
             {
                 mat[pos.linha, pos.coluna] = true;

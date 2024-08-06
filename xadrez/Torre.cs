@@ -1,3 +1,4 @@
+using tabuleiro;
 using xadrez_Console.Tabuleiro;
 
 namespace xadrez
@@ -23,14 +24,12 @@ namespace xadrez
         {
             bool[,] mat = new bool[Tab.linhas, Tab.colunas];
 
-            Posicao pos = new Posicao((char)0, 0);
+            Posicao pos = new Posicao('a', 0);
 
 
             // Acima
 
-#pragma warning disable CS8602 // Desreferência de uma referência possivelmente nula.
-            pos.definirValores(posicao.linha - 1, posicao.coluna);
-#pragma warning restore CS8602 // Desreferência de uma referência possivelmente nula.
+            pos.definirValores(posicao!.linha - 1, posicao.coluna);
             while (Tab.posicaoValida(pos) && podeMover(pos))
             {
                 mat[pos.linha, pos.coluna] = true;
@@ -38,16 +37,13 @@ namespace xadrez
                 {
                     break;
                 }
-                pos.linha -= 1;
+                pos.linha = pos.linha - 1;
             }
-            return mat;
 
 
             // Abaixo
 
-#pragma warning disable CS0162 // Código inacessível detectado
             pos.definirValores(posicao.linha + 1, posicao.coluna);
-#pragma warning restore CS0162 // Código inacessível detectado
             while (Tab.posicaoValida(pos) && podeMover(pos))
             {
                 mat[pos.linha, pos.coluna] = true;
@@ -55,14 +51,13 @@ namespace xadrez
                 {
                     break;
                 }
-                pos.linha += 1;
+                pos.linha = pos.linha + 1;
             }
-            return mat;
 
 
             // Direita
 
-            pos.definirValores(posicao.linha, posicao.coluna + 'a');
+            pos.definirValores(posicao.linha, posicao.coluna + 1);
             while (Tab.posicaoValida(pos) && podeMover(pos))
             {
                 mat[pos.linha, pos.coluna] = true;
@@ -70,15 +65,14 @@ namespace xadrez
                 {
                     break;
                 }
-                pos.coluna += 'a';
+                pos.coluna = pos.coluna + 1;
             }
-            return mat;
 
 
             // Esquerda
 
 
-            pos.definirValores(posicao.linha, posicao.coluna - 'a');
+            pos.definirValores(posicao.linha, posicao.coluna - 1);
             while (Tab.posicaoValida(pos) && podeMover(pos))
             {
                 mat[pos.linha, pos.coluna] = true;
@@ -86,11 +80,9 @@ namespace xadrez
                 {
                     break;
                 }
-                pos.coluna -= 'a';
+                pos.coluna = pos.coluna - 1;
             }
             return mat;
-
-
         }
     }
 }

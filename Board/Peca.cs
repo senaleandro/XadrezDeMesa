@@ -1,11 +1,12 @@
 using System.Reflection.Metadata;
+using tabuleiro;
 using xadrez_Console.Tabuleiro;
 
 namespace xadrez
 {
     abstract class Peca
     {
-        public Posicao posicao { get; set; }
+        public Posicao? posicao { get; set; } 
         public Cor cor { get; protected set; }
         public int qtdMovimentos { get; protected set; }
         public Tabuleiro Tab { get; protected set; }
@@ -13,10 +14,10 @@ namespace xadrez
 
         public Peca(Tabuleiro tab, Cor cor)
         {
-            this.posicao = null;
+            posicao = null;
             Tab = tab;
             this.cor = cor;
-            this.qtdMovimentos = 0;
+            qtdMovimentos = 0;
         }
 
          public void incrementarQtdMovimento()
@@ -40,13 +41,12 @@ namespace xadrez
                     {
                         return true;
                     }
-                }
-                
+                }              
              }
              return false;
         }
 
-        public bool movimentoPossivel(Posicao pos)
+        public bool podeMoverPara(Posicao pos)
         {
             return movimentosPossiveis()[pos.linha, pos.coluna];
         }

@@ -5,24 +5,20 @@ namespace xadrez
         public int coluna { get; set; }
         public int linha { get; set; }
 
-        public Posicao(char coluna, int linha)
+        public Posicao(int coluna, int linha)
         {
             this.coluna = coluna;
             this.linha = linha;
         }
-
-        public void definirValores( int linha, int coluna)
+        public void definirValores(int linha, int coluna)
         {
-        }
-
-        public Posicao toPosicao()
-        {
-            return new Posicao((char)(coluna - 'a'), 8 - linha);
+            this.linha = linha;
+            this.coluna = coluna;
         }
 
         public override string ToString()
         {
-            return linha 
+            return linha
             + ", "
              + coluna;
         }

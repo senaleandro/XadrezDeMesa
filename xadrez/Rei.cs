@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using tabuleiro;
 using xadrez_Console.Tabuleiro;
 
 namespace xadrez
@@ -25,7 +26,7 @@ namespace xadrez
 
         private bool testeTorreParaRoque(Posicao pos)
         {
-            Peca p = Tab.peca(pos);
+            var p = Tab.peca(pos);
             return p != null && p is Torre && p.cor == cor && p.qtdMovimentos == 0;
         }
 
@@ -33,12 +34,12 @@ namespace xadrez
         {
             bool[,] mat = new bool[Tab.linhas, Tab.colunas];
 
-            Posicao pos = new Posicao((char)0, 0);
+            Posicao pos = new Posicao('a', 0);
 
 
             // Acima
 
-            pos.definirValores(posicao.linha - 1, posicao.coluna);
+            pos.definirValores(posicao!.linha - 1, posicao.coluna);
             if (Tab.posicaoValida(pos) && podeMover(pos))
             {
                 mat[pos.linha, pos.coluna] = true;
@@ -111,7 +112,10 @@ namespace xadrez
             {
                 //Jogadaespecial Roque pequeno
                 Posicao posT1 = new Posicao((char)posicao.linha, posicao.coluna + 3);
-                if (testeTorreParaRoque(posT1))
+                if (!testeTorreParaRoque(posT1))
+                {
+                }
+                else
                 {
                     Posicao p1 = new Posicao((char)posicao.linha, posicao.coluna + 1);
                     Posicao p2 = new Posicao((char)posicao.linha, posicao.coluna + 2);
@@ -119,9 +123,9 @@ namespace xadrez
                     {
                         mat[posicao.linha, posicao.coluna + 2] = true;
                     }
-                } 
-            // #jogadaespecial Roque grande
-            Posicao posT2 = new Posicao((char)posicao.linha, posicao.coluna - 4);
+                }
+                // #jogadaespecial Roque grande
+                Posicao posT2 = new Posicao((char)posicao.linha, posicao.coluna - 4);
             if (testeTorreParaRoque(posT2))
             {
                 Posicao p1 = new Posicao((char)posicao.linha, posicao.coluna - 1);

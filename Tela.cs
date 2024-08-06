@@ -1,4 +1,5 @@
 using System;
+using tabuleiro;
 using xadrez;
 using xadrez_Console.Tabuleiro;
 
@@ -34,10 +35,10 @@ namespace xadrez
         public static void imprimirPecasCapturadas(PartidaDeXadrez partida)
         {
             Console.WriteLine("Peças capturadas");
-            Console.Write("Brancas");
+            Console.Write("Brancas :");
             imprimirConjunto(partida.pecasCapturadas(Cor.Branca));
             Console.WriteLine();
-            Console.Write("Pretas");
+            Console.Write("Pretas: ");
             ConsoleColor aux = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Yellow;
             imprimirConjunto(partida.pecasCapturadas(Cor.Preta));
@@ -101,12 +102,8 @@ namespace xadrez
 
         public static PosicaoXadrez lerPosicaoXadrez()
         {
-#pragma warning disable CS8600 // Conversão de literal nula ou possível valor nulo em tipo não anulável.
-            string s = Console.ReadLine();
-#pragma warning restore CS8600 // Conversão de literal nula ou possível valor nulo em tipo não anulável.
-#pragma warning disable CS8602 // Desreferência de uma referência possivelmente nula.
-            char coluna = s[0];
-#pragma warning restore CS8602 // Desreferência de uma referência possivelmente nula.
+            string s = Console.ReadLine()!;
+            char coluna = s![0];
             int linha = int.Parse(s[1] + "");
             return new PosicaoXadrez(coluna, linha);
         }

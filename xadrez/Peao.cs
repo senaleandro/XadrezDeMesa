@@ -1,3 +1,4 @@
+using tabuleiro;
 using xadrez_Console.Tabuleiro;
 
 namespace xadrez
@@ -8,6 +9,7 @@ namespace xadrez
         private PartidaDeXadrez partida;
         public Peao(Tabuleiro tab, Cor cor, PartidaDeXadrez partida) : base(tab, cor)
         {
+            this.partida = partida;
         }
 
         public override string ToString()
@@ -30,17 +32,18 @@ namespace xadrez
         {
             bool[,] mat = new bool[Tab.linhas, Tab.colunas];
 
-            Posicao pos = new Posicao((char)0, 0);
+            Posicao pos = new Posicao('a', 0);
 
             if (cor == Cor.Branca)
             {
-                pos.definirValores(posicao.linha - 1, posicao.coluna);
+                pos.definirValores(posicao!.linha - 1, posicao.coluna);
                 if (Tab.posicaoValida(pos) && livre(pos))
                 {
                     mat[pos.linha, pos.coluna] = true;
                 }
                 pos.definirValores(posicao.linha - 2, posicao.coluna);
-                if (Tab.posicaoValida(pos) && livre(pos) && qtdMovimentos == 0)
+                Posicao p2 = new Posicao(posicao.linha - 1, posicao.coluna);
+                if (Tab.posicaoValida(p2) && livre(p2) && Tab.posicaoValida(pos) && livre(pos) && qtdMovimentos == 0)
                 {
                     mat[pos.linha, pos.coluna] = true;
                 }
@@ -54,26 +57,29 @@ namespace xadrez
                 {
                     mat[pos.linha, pos.coluna] = true;
                 }
+
+
+
+                // #Jogadaespecial En Passant
+                if (posicao.linha == 3)
+                {
+                    Posicao esquerda = new Posicao((char)posicao.linha, posicao.coluna - 1);
+                    if (Tab.posicaoValida(esquerda) && existeInimigo(esquerda) && Tab.peca(esquerda) == partida.vulneravelEnPassant)
+                    {
+                        mat[esquerda.linha--, esquerda.coluna] = true;
+                    }
+                    Posicao direita = new Posicao((char)posicao.linha, posicao.coluna +1);
+                    if (Tab.posicaoValida(direita) && existeInimigo(direita) && Tab.peca(direita) == partida.vulneravelEnPassant)
+                    {
+                        mat[direita.linha--, direita.coluna] = true;
+                    }
+                }
             }
 
-            // #Jogadaespecial En Passant
-            if (posicao.linha == 3)
-            {
-                Posicao esquerda = new Posicao((char)posicao.linha, posicao.coluna - 1);
-                if (Tab.posicaoValida(esquerda) && existeInimigo(esquerda) && Tab.peca(esquerda) == partida.vulneravelEnPassant)
-                {
-                    mat[esquerda.linha --, esquerda.coluna] = true;
-                }
-                Posicao direita = new Posicao((char)posicao.linha, posicao.coluna + 1);
-                if (Tab.posicaoValida(direita) && existeInimigo(direita) && Tab.peca(direita) == partida.vulneravelEnPassant)
-                {
-                    mat[direita.linha --, direita.coluna] = true;
-                }
-            }
 
             else
             {
-                pos.definirValores(posicao.linha + 1, posicao.coluna);
+                pos.definirValores(posicao!.linha + 1 , posicao.coluna);
                 if (Tab.posicaoValida(pos) && livre(pos))
                 {
                     mat[pos.linha, pos.coluna] = true;
@@ -101,12 +107,12 @@ namespace xadrez
                     Posicao esquerda = new Posicao((char)posicao.linha, posicao.coluna - 1);
                     if (Tab.posicaoValida(esquerda) && existeInimigo(esquerda) && Tab.peca(esquerda) == partida.vulneravelEnPassant)
                     {
-                        mat[esquerda.linha ++, esquerda.coluna] = true;
+                        mat[esquerda.linha + 1, esquerda.coluna] = true;
                     }
                     Posicao direita = new Posicao((char)posicao.linha, posicao.coluna + 1);
                     if (Tab.posicaoValida(direita) && existeInimigo(direita) && Tab.peca(direita) == partida.vulneravelEnPassant)
                     {
-                        mat[direita.linha++, direita.coluna] = true;
+                        mat[direita.linha + 1, direita.coluna] = true;
                     }
                 }
             }
